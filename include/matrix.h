@@ -13,6 +13,8 @@ int matrixIndex(MATRIX *matrix, int row, int column);
 
 void matrixInsert(MATRIX *matrix, int row, int column, int value); 
 
-int *matrixGetRow(MATRIX *matrix, int row); 
+MATRIX *matrixMultiply(MATRIX *m1, MATRIX *m2); 
+
+void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result); 
 
 #endif
