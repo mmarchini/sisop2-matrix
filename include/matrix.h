@@ -9,6 +9,8 @@ typedef struct _MATRIX {
 
 MATRIX *matrixInit(int rows, int columns);
 
+void matrixPrint(MATRIX *matrix);
+
 int matrixIndex(MATRIX *matrix, int row, int column);
 
 void matrixInsert(MATRIX *matrix, int row, int column, int value); 

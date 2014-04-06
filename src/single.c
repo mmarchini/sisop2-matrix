@@ -3,19 +3,20 @@
 #include "../include/matrix.h"
 
 int partial(MATRIX *m1, MATRIX *m2, int row, int column){
-    for ( int r = 0 ; r < m2->rows ; r++ ){
-        for ( int c = 0 ; c < m2->columns ; c++ ) {
-        }
+    int i;
+    int sum = 0;
+    for ( i = 0 ; i < m2->rows ; i++ ){
+            sum += matrixGet(m1, row, i) * matrixGet(m2, i, column);
     }
+
+    return sum;
 }
 
 void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result) {
-    int sum=0;
-    for( int r=0 ; r < result->rows ; r++ ){
-        for( int c=0 ; c < result->columns ; c++ ){
-            sum=0;
-
-            matrixInsert(result, r, c, sum);
+    int r, c;
+    for( r=0 ; r < result->rows ; r++ ){
+        for( c=0 ; c < result->columns ; c++ ){
+            matrixInsert(result, r, c, partial(m1, m2, r, c));
         }
     }
 }

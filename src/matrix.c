@@ -14,8 +14,20 @@ MATRIX *matrixInit(int rows, int columns) {
 
     matrix = calloc(1, sizeof(MATRIX));
     matrix->matrix = calloc(rows*columns, sizeof(int));
+    matrix->rows = rows;
+    matrix->columns = columns;
 
     return matrix;
+}
+
+void matrixPrint(MATRIX *matrix){
+    int row, column;
+    for( row = 0; row<matrix->rows; row++ ){
+        printf("| ");
+        for (column = 0; column<matrix->columns; column++)
+            printf("%d ", matrixGet(matrix, row, column));
+        printf("|\n");
+    }
 }
 
 /*
@@ -45,19 +57,20 @@ void matrixInsert(MATRIX *matrix, int row, int column, int value) {
 MATRIX *matrixMultiply(MATRIX *m1, MATRIX *m2){
     MATRIX *matrix=NULL;
 
-    if(!(m1*m2))
-        return NULL 
+    if(!m1 || !m2)
+        return NULL;
+
     if(m1->columns!=m2->rows)
-        return NULL 
+        return NULL;
 
     matrix = calloc(1, sizeof(int));
     matrix->rows = m1->rows;
-    matrix->columns = m1->columns;
+    matrix->columns = m2->columns;
     matrix->matrix = calloc(m1->rows*m2->columns, sizeof(int));
 
-    matrixMultiplyCore(m1, m2, result);
+    matrixMultiplyCore(m1, m2, matrix);
 
-    return result;
+    return matrix;
 }
 
 /*
