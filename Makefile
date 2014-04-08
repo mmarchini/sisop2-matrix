@@ -12,7 +12,7 @@ process: main.o matrix.o
 
 pthread: main.o matrix.o
 	@gcc -c src/pthread.c -L include -o obj/pthread.o
-	@gcc obj/matrix.o obj/pthread.o obj/main.o -L include -o bin/pthread
+	@gcc obj/matrix.o obj/pthread.o obj/main.o -lpthread -L include -o bin/pthread
 
 single: main.o matrix.o
 	@gcc -c src/single.c -L include -o obj/single.o
