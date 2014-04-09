@@ -25,10 +25,8 @@ int main() {
     MATRIX *m1, *m2, *result;
 
     m1 = parseFile("in1.txt");
-    matrixPrint(m1);
 
     m2 = parseFile("in2.txt");
-    matrixPrint(m2);
 
     result = matrixMultiply(m1, m2);
     matrixPrint(result);
