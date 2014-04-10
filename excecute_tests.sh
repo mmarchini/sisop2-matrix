@@ -1,7 +1,5 @@
-pthread="../../../bin/pthread";
+process="../../../bin/process";
 results_path="../../../results";
-
-mkdir -p results;
 
 cd tests;
 
@@ -12,7 +10,7 @@ do
     do
         cd $test_case;
         echo "pthread $profile $test_case";
-        $pthread  > "$results_path/$profile.$test_case.pthread.log";
+        $process 6;
         cd ..;
     done
     cd ..;

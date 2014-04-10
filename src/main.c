@@ -21,15 +21,23 @@ MATRIX *parseFile(char filename[100]){
     return matrix;
 }
 
-int main() {
+int main(int argn, char *args[]) {
     MATRIX *m1, *m2, *result;
+    int threads=0;
 
     m1 = parseFile("in1.txt");
 
     m2 = parseFile("in2.txt");
 
-    result = matrixMultiply(m1, m2);
-    matrixPrint(result);
+    if(argn>1){
+        sscanf(args[1], "%d", &threads);
+        
+    } else{
+        threads = 1;
+    }
+
+    result = matrixMultiply(m1, m2, threads);
+    matrixSave(result, "out.txt");
 
     return 0;
 }

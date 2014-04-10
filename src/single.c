@@ -12,7 +12,7 @@ int partial(MATRIX *m1, MATRIX *m2, int row, int column){
     return sum;
 }
 
-void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result) {
+void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result, int threads) {
     int r, c;
     for( r=0 ; r < result->rows ; r++ ){
         for( c=0 ; c < result->columns ; c++ ){

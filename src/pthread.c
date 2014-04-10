@@ -34,7 +34,7 @@ void *partialThread(void *args) {
     tp->counter = tp->counter-1;
 }
 
-void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result) {
+void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result, int threads) {
     pthread_t token;
     int r, c;
     S_THREAD_PARAMETERS *tp = calloc(1, sizeof(S_THREAD_PARAMETERS));

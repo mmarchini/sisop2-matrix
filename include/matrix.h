@@ -15,8 +15,8 @@ int matrixIndex(MATRIX *matrix, int row, int column);
 
 void matrixInsert(MATRIX *matrix, int row, int column, int value); 
 
-MATRIX *matrixMultiply(MATRIX *m1, MATRIX *m2); 
+MATRIX *matrixMultiply(MATRIX *m1, MATRIX *m2, int threads); 
 
-void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result); 
+void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result, int threads); 
 
 #endif
