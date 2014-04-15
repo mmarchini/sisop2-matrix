@@ -9,18 +9,18 @@ do
     for test_case in $(ls)
     do
         cd $test_case;
-        for test_type in process # pthread
+        for test_type in process pthread
         do
             test_excecutable="$bin_path/$test_type";
             for n in 2 4 8 
             do
-                for i in 1 2 3 4 5 6 7 8 9 10 
+                for i in $(seq 50)
                 do
                     echo "$test_excecutable $profile $test_case $n $i";
                     $test_excecutable $n;
                     mv out.txt "out-$test_type-$n-$i.txt";
                     mv profiling.log "profiling-$test_type-$n-$i.log";
-                    sleep 0.5s;
+                    #sleep 0.5s;
                 done
             done
         done

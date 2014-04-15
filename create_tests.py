@@ -58,16 +58,14 @@ def create_test(test_profile, index):
 test_profiles = [
     (1,1),
     (2,1),
-    (3,1),
-    (3,2),
-    (4,3),
+    (1,2),
 ]
 
-test_cases = []
+test_cases = [8, 16, 32, 64]
 
 tests_per_profile = 5
 
 for test_profile in test_profiles:
-    for i in range(1,tests_per_profile+1):
-        test_cases.append(create_test(test_profile, i))
+    for i in test_cases:
+        create_test(test_profile, i)
 
