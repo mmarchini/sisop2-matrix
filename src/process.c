@@ -24,7 +24,7 @@ void matrixMultiplyCore(MATRIX *m1, MATRIX *m2, MATRIX *result, int threads) {
 
     int *counter = mmap(NULL, sizeof(int)*threads, PROT_READ | PROT_WRITE, 
                                 MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    for(index==threads-1;index!=0;index--) counter[index]=0;
+    for(index=threads-1;index!=0;index--) counter[index]=0;
 
     // Troca o vetor da matriz resultante por um vetor presente na memória compartilhada;
     int *_result_matrix = mmap(NULL, sizeof(int)*result->rows*result->columns,
