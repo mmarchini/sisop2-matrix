@@ -6,7 +6,7 @@ import numpy
 import random
 #import ConfigParser
 
-#random.seed(3)
+random.seed(3)
 range_ = (1, 20)
 numeric_range = (5, 40)
 
@@ -14,7 +14,8 @@ def create_test(test_profile, index):
     path = "tests/" + "profile_%s_%s/"%test_profile + "%0.2d"%index
     os.makedirs(path)
 
-    test_case = test_profile*random.randrange(*range_)
+    test_case = map(lambda r: r*index, test_profile)
+    print test_case
 
     m1 = []
     for i in range(test_case[0]):
@@ -62,11 +63,11 @@ test_profiles = [
     (4,3),
 ]
 
-tests_per_profile = 10
-
 test_cases = []
 
+tests_per_profile = 5
+
 for test_profile in test_profiles:
-    for i in range(tests_per_profile):
+    for i in range(1,tests_per_profile+1):
         test_cases.append(create_test(test_profile, i))
 
