@@ -19,14 +19,12 @@ single: main.o matrix.o
 	@gcc obj/matrix.o obj/single.o obj/main.o -L include -o bin/single
 
 create_tests: all
-	@rm -rf tests;
 	@python create_tests.py
 
 execute_tests: create_tests
 	@sh excecute_tests.sh
 
 plotting_results: execute_tests
-	@rm -rf results
 	@python plotting.py
 	@sh plotting.sh
 

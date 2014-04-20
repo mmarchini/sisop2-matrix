@@ -1,6 +1,13 @@
+#!/usr/bin/env python
+#coding=utf-8
+
 import os
 import sys
+import shutil
 import re
+from config import Config
+
+config = Config(sector="plotting")
 
 
 RE_PROFILE = re.compile("profile_(\d+)_(\d+)")
@@ -49,7 +56,12 @@ for profile_path in profiles:
             test_case_dict[test_type][test_threads].append(elapsed_time)
         test_cases_dicts[profile][test_case] = test_case_dict
 
-os.mkdir("results")
+result_folder = config.get("result_folder", "'results'")
+result_format = config.get("result_format", "'jpg'")
+result_format_parameter = config.get("result_format_parameter", result_format)
+if os.path.exists(result_folder):
+    shutil.rmtree(result_folder)
+os.mkdir(result_folder)
 
 files_dict = {}
 
@@ -77,7 +89,7 @@ for filename, file_dict in files_dict.iteritems():
             y_.append(elapsed_time)
         y.append(y_)
 
-    with open("results/%s.oct"%filename, "w+") as file_:
+    with open("%s/%s.oct"%(result_folder, filename), "w+") as file_:
         file_.write("x=%s;\n"%x)
         file_.write("y=[%s];\n"%";".join(map(str, y)))
         file_.write("plot(x,y,\"-@\");\n")
@@ -85,5 +97,5 @@ for filename, file_dict in files_dict.iteritems():
         file_.write("xlabel(\"No Threads\");\n")
         file_.write("ylabel(\"Tempo Medio Execucao\");\n")
         file_.write("legend(%s);\n"%", ".join(map(lambda r: "\"%s\""%r, test_case_legends)))
-        file_.write("print(\"results/%s.jpg\", \"-djpg\");\n"%filename)
+        file_.write("print(\"%s/%s.%s\", \"-d%s\");\n"%(result_folder, filename, result_format, result_format_parameter))
 

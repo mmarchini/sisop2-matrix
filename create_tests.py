@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+import shutil
 import os
 import numpy
 import random
-#import ConfigParser
+from config import Config
 
-random.seed(3)
-range_ = (1, 20)
-numeric_range = (5, 40)
+config = Config()
+
+if config.get("seed"):
+    random.seed(config.get("seed"))
+
+numeric_range = config.get("cells_range")
 
 def create_test(test_profile, index):
     path = "tests/" + "profile_%s_%s/"%test_profile + "%0.2d"%index
@@ -48,22 +52,17 @@ def create_test(test_profile, index):
         file_.write("COLUNAS = %s\n"%result.shape[1])
         file_.writelines("\n".join([" ".join(map(str,row)) for row in result.tolist()]))
 
-
-
     return path
 
 # Generate test cases
+if os.path.exists("tests"):
+    shutil.rmtree("tests")
+
 
 # Define os perfils dos testes, ou seja, a "proporção" da matriz.
-test_profiles = [
-    (1,1),
-    (2,1),
-    (1,2),
-]
+test_profiles = config.get("profiles")
 
-test_cases = [8, 16, 32, 64]
-
-tests_per_profile = 5
+test_cases = config.get("multipliers")
 
 for test_profile in test_profiles:
     for i in test_cases:
